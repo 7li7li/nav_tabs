@@ -52,25 +52,6 @@ function recode(){
     $('#captcha_img').attr('src','../include/validatecode.php?r='+Math.random());
     $("input[name=\'authcode\']").val('');
 }
-//微信相关推送
-function wxPlus(){
-    var url = $("input[name=\'url\']").val();
-    var name = $("input[name=\'name\']").val();
-    if(!url || !name){
-        return false;
-    }
-    $.ajax({
-        url:"./wxplus.php?wx=plus",
-        type:"POST",
-        data:{
-            wx_name: name,
-            wx_url: url
-        },success:function(data){
-            console.log(data.data);
-        }
-        });
-}
-
 //提交
 function submit(){
     var url = $("input[name=\'url\']");
@@ -95,7 +76,6 @@ function submit(){
         },
         success:function(data){
             if(data.code == '200'){
-                wxPlus(name,url);
                 swal({
                     title: "成功",
                     text: data.msg,

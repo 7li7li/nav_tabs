@@ -8,8 +8,6 @@
   <!--备案信息-->
   <?php if($conf['icp'] != NULL){
   echo '<a href="http://beian.miit.gov.cn/" class="icp" target="_blank" _mstmutation="1" _istranslated="1">'.$conf['icp'].'</a>'; } ?> 
-  <!--版权信息-->
-  <p> <?php echo $conf['copyright']; ?></p>
   <!--网站统计-->
  <?php if($conf['wztj'] != NULL){echo $conf["wztj"];}?>
   </div>  

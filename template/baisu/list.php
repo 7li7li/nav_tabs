@@ -1,6 +1,5 @@
 <?php
 
-// 主题开发文档：https://doc.lylme.com/dev/theme
 $rel = $conf["mode"] == 2 ? '' : 'rel="nofollow"';
 	$link_desc = '';
 		if (theme_config('link_desc') == '1') {

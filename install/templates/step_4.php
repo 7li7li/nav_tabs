@@ -24,11 +24,10 @@
                 <strong>六零导航页安装信息：</strong><br />
                 <p><b>后台账号：</b>admin</p>
                 <p><b>后台密码：</b>123456</p><br /><br />
-                您可以访问 <a href="https://doc.lylme.com/spage/#/readme" target="_blank" class="link">帮助文档</a> 获取更多帮助
             </div>
         </div>
     </div>
-    <div class="footer"><span class="step4"></span> <span class="copyright"><?php echo $cfg_copyright; ?></span></div>
+    <div class="footer"><span class="step4"></span></div>
 </body>
 
 </html>

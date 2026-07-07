@@ -72,14 +72,6 @@ if ($set == 'save') {
               </form>
             </div>
           </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="form-group">
-              <h4>文件安全</h4>
-               <p> <a href="./filecheck.php">文件完整性校验</a></p>
-              </div>
-            </div>
-          </div>
         </div>
 
       </div>

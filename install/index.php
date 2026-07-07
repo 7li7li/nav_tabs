@@ -2,7 +2,6 @@
 
 /**
  * @File:   index.php
- * @User:   LyLme <admin@lylme.com>
  * @Date:   2023-12-16
  * @Description: 六零导航页安装程序
  */
@@ -21,8 +20,6 @@ define('INSTALL_PATH', str_replace('\\', '/', dirname(__FILE__)));
 define('ROOT_PATH', dirname(INSTALL_PATH . '/'));
 require_once(ROOT_PATH . "/include/version.php");
 
-// 版权信息设置
-$cfg_copyright = '© 2022-' . date("Y") . ' LYLME';
 
 // 获取当前步骤
 $s = getStep();

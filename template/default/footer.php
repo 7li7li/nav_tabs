@@ -13,7 +13,6 @@
     <?php if ($conf['icp'] != null) {
         echo '<a href="http://beian.miit.gov.cn/" class="icp" target="_blank" rel="nofollow noopener">' . $conf['icp'] . '</a>';
     } ?>
-    <p><?php echo $conf['copyright']; ?></p>
     <?php if ($conf['wztj'] != null) {
         echo $conf["wztj"];
     } ?>

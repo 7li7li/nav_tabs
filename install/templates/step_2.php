@@ -82,7 +82,7 @@
             </table>
         </div>
     </div>
-    <div class="footer"><span class="step3"></span> <span class="copyright"><?php echo $cfg_copyright; ?></span> <span
+    <div class="footer"><span class="step3"></span> <span
                 class="formSubBtn"> <a href="javascript:void(0);" onclick="history.go(-1);return false;" class="back">返 回</a> <a
                     href="javascript:void(0);" onclick="CheckForm();return false;" class="submit">开始安装</a>
 		<input type="hidden" name="s" id="s" value="3">

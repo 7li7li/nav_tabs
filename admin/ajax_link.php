@@ -269,66 +269,6 @@ switch ($submit) {
 		if (empty($head['title']) && empty($head['icon'])) exit('Unable to access');
 		exit(json_encode($head, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));  //输出json
 		break;
-	//检测更新
-	case 'update':
-		function zipExtract($src, $dest)
-		{
-			$zip = new ZipArchive();
-			if ($zip->open($src) === true) {
-				$zip->extractTo($dest);
-				$zip->close();
-				return true;
-			}
-			return false;
-		}
-		function deldir($dir)
-		{
-			if (!is_dir($dir)) return false;
-			$dh = opendir($dir);
-			while ($file = readdir($dh)) {
-				if ($file != "." && $file != "..") {
-					$fullpath = $dir . "/" . $file;
-					if (!is_dir($fullpath)) {
-						unlink($fullpath);
-					} else {
-						deldir($fullpath);
-					}
-				}
-			}
-			closedir($dh);
-			if (rmdir($dir)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		$scriptpath = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
-		$scriptpath = substr($scriptpath, 0, strrpos($scriptpath, '/'));
-		$admin_path = substr($scriptpath, strrpos($scriptpath, '/') + 1);
-		$update  = require('cache.php');
-		if (!empty($update) && $update['switch']) {
-			if (!$update['file'] == $_POST['file']) {
-				exit('{"code": -1,"msg":"更新文件校验不通过！"}');
-			}
-		} else {
-			exit('{"code": -99,"msg":"更新未经鉴权！"}');
-		}
-		$RemoteFile = $_POST['file'];
-		$ZipFile = "lylme_spage-update.zip";
-		copy($RemoteFile, $ZipFile) or die('{"code": 400,"msg":"无从更新服务器获取更新资源包！"}');
-		if (zipExtract($ZipFile, ROOT)) {
-			if ($admin_path != 'admin' && is_dir(ROOT . 'admin')) {
-				//修改后台地址
-				deldir(ROOT . $admin_path);
-				rename(ROOT . 'admin', ROOT . $admin_path);
-			}
-			unlink($ZipFile);
-			exit('{"code": 200,"msg":"更新成功"}');
-		} else {
-			unlink($ZipFile);
-			exit('{"code": 10,"msg":"无法解压文件！请手动下载更新包解压"}');
-		}
-		break;
 	default:
 		exit('{"code": -2,"msg":"error"}');
 		break;

@@ -1,12 +1,8 @@
 <?php
 /* 
  * @Description: 加密页
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-09 01:04:15
- * @FilePath: /lylme_spage/pwd/index.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 include("../include/common.php");
 ?>

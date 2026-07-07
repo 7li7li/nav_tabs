@@ -1,25 +1,30 @@
 <?php
 /* 
  * @Description: 关于页面
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2026-03-22 18:10:13
- * @FilePath: /lylme_spage/admin/about.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 $title = '关于页面设置';
 include './head.php';
 $set = isset($_GET['set'])?$_GET['set']:"";
+$aboutContent = isset($conf['about_content']) ? $conf['about_content'] : '';
+$aboutUrl = siteurl() . '/about';
 if ($set== 'conf_submit') {
-    $about = $_POST['about'];
-    saveSetting('about_content', $about);
+    $about = isset($_POST['about']) ? $_POST['about'] : '';
+    if (!saveSetting('about_content', $about)) {
+        echo '<script>alert("修改失败，请检查数据库配置！");history.go(-1);</script>';
+        exit();
+    }
     echo '<script>alert("修改成功！");window.location.href="./about.php";</script>';
     exit();
 }
 if ($set == 'default') {
+    $defaultAboutContent = "<h3>关于本站</h3>\r\n<p>本站致力于提供简洁高效的上网导航和搜索入口。</p>\r\n<hr>\r\n<h3>本站承诺</h3>\r\n<p><strong>不会主动收集用户隐私信息。</strong></p>\r\n<p>本站链接直接跳转目标站点，不会记录点击、访问或搜索内容。</p>\r\n<hr>\r\n<h3>申请收录</h3>\r\n<p>请访问 <a href=\"../apply\" target=\"_blank\">收录申请</a> 页面提交。</p>";
 
-    saveSetting('about_content', "<h3>关于本站</h3>\r\n<p>感谢来访，本站致力于简洁高效的上网导航和搜索入口，安全快捷。</p>\r\n<p>如果您喜欢我们的网站，请将本站添加到收藏夹（快捷键<code>Ctrl+D</code>），并<a href=\"https://jingyan.baidu.com/article/4dc40848868eba89d946f1c0.html\" target=\"_blank\">设为浏览器主页</a>，方便您的下次访问，感谢支持。<p>\r\n<hr>\r\n<h3>本站承诺</h3>\r\n<p><strong>绝对不会收集用户的隐私信息</strong><p>\r\n<p>区别于部分导航网站，本站链接直接跳转目标，不会对链接处理再后跳转，不会收集用户的隐私信息，包括但不限于点击记录，访问记录和搜索记录，请放心使用</p>\r\n<hr>\r\n<h3>申请收录</h3>\r\n<p>请点<a href=\"../apply\" target=\"_blank\">这里</a></p>\r\n<hr>\r\n<h3>联系我们</h3>\r\n<p>若您在使用本站时遇到了包括但不限于以下问题：</p>\r\n<li>图标缺失</li>\r\n<li>目标网站无法打开</li>\r\n<li>描述错误</li>\r\n<li>网站违规</li>\r\n<li>收录加急处理</li>\r\n<li>链接删除</li>\r\n<p><strong>请发邮件与我们联系</strong></p>\r\n<h5>联系邮箱</h5>\r\n<p><a href=\"mailto:无\">无</a></p>\r\n<h5>联系说明</h5>\r\n<p>为了您的问题能快速被处理，建议在邮件主题添加【反馈】【投诉】【推荐】【友链】</p>");
+    if (!saveSetting('about_content', $defaultAboutContent)) {
+        echo '<script>alert("恢复默认失败，请检查数据库配置！");history.go(-1);</script>';
+        exit();
+    }
     echo '<script>alert("恢复默认成功！");window.location.href="./about.php";</script>';
     exit();
 }
@@ -30,20 +35,19 @@ if ($set == 'default') {
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4>修改收录设置</h4>
+                        <h4>关于页面设置</h4>
                         <div class="panel-body">
                             <form action="./about.php?set=conf_submit" method="POST">
-                                <div class="form-group" id="about">
-                                    <label class="btn-block" for="web_yan_status">关于页面地址</label>
-                                    <p><code><?php echo siteurl() ?>/about</code></p>
-                                    <a class="btn btn-cyan" href="<?php echo siteurl() ?>/about" target="_blank">访问关于页面</a>
+                                <div class="form-group">
+                                    <label class="btn-block">关于页面地址</label>
+                                    <p><code><?php echo htmlspecialchars($aboutUrl, ENT_QUOTES, 'UTF-8'); ?></code></p>
+                                    <a class="btn btn-cyan" href="<?php echo htmlspecialchars($aboutUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank">访问关于页面</a>
                                     <a class="btn btn-danger" href="./about.php?set=default" onclick="return confirm('确定将关于页面内容恢复默认？\n注意：该操作不可逆');">恢复默认内容</a>
                                 </div>
                                 <div class="form-group">
-                                    <label for="about">关于页内容</label>
-                                    <textarea width="200px" type="text" rows="20" class="form-control" name="about" placeholder="显示在关于页面的内容"><?php echo($conf['about_content']); ?></textarea>
+                                    <label for="about_content">关于页内容</label>
+                                    <textarea id="about_content" rows="20" class="form-control" name="about" placeholder="显示在关于页面的内容" spellcheck="false" style="min-height:420px;resize:vertical;"><?php echo htmlspecialchars($aboutContent, ENT_QUOTES, 'UTF-8'); ?></textarea>
                                     <small class="help-block">显示在关于页面的内容<code>使用HTML代码编写</code></small>
-                                    工具：<a href="https://www.lylme.com/html/" target="_blank">在线MD编辑器</a> 编辑后复制html代码粘贴
                                 </div>
                                 <div class="form-about">
                                     <input type="submit" class="btn btn-primary btn-block" value="保存">

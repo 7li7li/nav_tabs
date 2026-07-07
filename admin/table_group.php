@@ -1,12 +1,8 @@
 <?php
 /* 
  * @Description: 
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-14 05:35:10
- * @FilePath: /lylme_spage/admin/table_group.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 include_once("../include/common.php");
 if (isset($islogin) == 1) {

@@ -2,14 +2,6 @@
 
 $title = '网站设置';
 include './head.php';
-$last = date("Ym");
-if (@file_get_contents('log.txt') != $last || !file_exists('cache.php')) {
-    $update = update();
-    file_put_contents('log.txt', $last);
-    var_export($update, true);
-    $content = "<?php\nreturn " . var_export($update, true) . "\n?>";
-    file_put_contents('cache.php', $content);
-}
 function uploadimg($arr, $uppath, $uptype)
 {
     if ((($arr["type"] == "image/jpeg") || ($arr["type"] == "image/jpg") || ($arr["type"] == "image/png")) && $arr["size"] < 10485760) {
@@ -30,7 +22,6 @@ if ($set == 'save') {
     $description = $_POST['description'];
     $mode = $_POST['mode'];
     $snapshot = $_POST['snapshot'];
-    $copyright = $_POST['copyright'];
     $icp = $_POST['icp'];
     $yan = $_POST['yan'];
     $wztj = $_POST['wztj'];
@@ -49,7 +40,6 @@ if ($set == 'save') {
     saveSetting('description', $description, "网站描述");
     saveSetting('mode', $mode, "网站运行模式");
     saveSetting('snapshot', $snapshot, "详情页快照API");
-    saveSetting('copyright', $copyright, "底部版权");
     saveSetting('icp', $icp, "ICP备案号");
     saveSetting('wztj', $wztj, "自定义footer");
     saveSetting('cdnpublic', $cdnpublic, "CDN地址");
@@ -137,18 +127,13 @@ if ($set == 'save') {
 											<span>详情页模式</span>
 										</label>
 
-										<small class="help-block">导航链接访问方式,详情页模式需要启用伪静态 <a href="https://doc.lylme.com/spage/#/urlwrite" target="_blank">查看教程</a></small>
+										<small class="help-block">导航链接访问方式，详情页模式需要启用伪静态。</small>
 									</div>
 
 									<div class="form-group">
-										<label for="web_site_copyright">版权信息</label>
-										<textarea width="200px" type="text" rows="3" class="form-control" name="copyright" placeholder="请输入版权信息，支持HTML代码"><?php echo $conf['copyright'] ?></textarea>
-										<small class="help-block">显示在首页底部的版权提示，<code>支持HTML代码</code></small>
-									</div>
-									<div class="form-group">
 										<label for="web_site_wztj">自定义footer</label>
 										<textarea type="text" rows="10" class="form-control" name="wztj" placeholder="可填写网站统计、引用JS文件等"><?php echo $conf['wztj'] ?></textarea>
-										<small class="help-block">站点底部自定义，可填写网站统计、JS代码(需要script标签)、CSS代码(需要style标签)等<code>支持HTML代码</code> <a href="https://doc.lylme.com/spage/#/footer" target="_blank">查看教程</a></small>
+										<small class="help-block">站点底部自定义，可填写网站统计、JS代码(需要script标签)、CSS代码(需要style标签)等<code>支持HTML代码</code></small>
 									</div>
 									<div class="form-group">
 										<label for="web_site_icp">备案号</label>
@@ -168,7 +153,7 @@ if ($set == 'save') {
 									<div class="form-group">
 										<label for="web_site_snapshot">详情页快照生成API</label>
 										<input class="form-control" type="text" id="web_site_snapshot" name="snapshot" value="<?php echo isset($conf['snapshot']) ? $conf['snapshot'] : "" ?>" placeholder="请输入API接口地址">
-										<small class="help-block">用于详情页生成网站缩略图，不填不启用，若不了解请留空 <a href="https://doc.lylme.com/spage/#/snapshot" target="_blank">查看教程</a></small>
+										<small class="help-block">用于详情页生成网站缩略图，不填不启用，若不了解请留空。</small>
 									</div>
 
 						

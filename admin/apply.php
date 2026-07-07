@@ -1,12 +1,8 @@
 <?php
 /* 
  * @Description: 申请收录
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-13 17:05:21
- * @FilePath: /lylme_spage/admin/apply.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 $title = '收录管理';
 include './head.php';
@@ -96,7 +92,6 @@ $grouplists = $DB->query("SELECT * FROM `lylme_groups`");
      <label for="apply_gg">收录页公告</label>
                       <textarea width="200px" type="text" rows="5" class="form-control" name="apply_gg" placeholder="显示在收录页的公告">' . $conf['apply_gg'] . '</textarea>
                <small class="help-block">显示在收录页的公告<code>使用HTML代码编写</code></small>
-               工具：<a href="https://www.lylme.com/html/" target="_blank">在线MD编辑器</a> 编辑后复制html代码粘贴
                     </div>
 <div class="form-apply">
 <input type="submit" class="btn btn-primary btn-block" value="保存"></form>
@@ -191,10 +186,10 @@ $grouplists = $DB->query("SELECT * FROM `lylme_groups`");
                                                 } else if (preg_match("/^<svg*/", $link["icon"])) {
                                                     echo $link["icon"];
                                                 } else {
-                                                    echo '<img class="lazy" src="https://cdn.lylme.com/admin/lyear/img/loading.gif" data-original="' . $res["apply_icon"] . '" />';
+                                                    echo '<img class="lazy" src="/assets/admin/loading.gif" data-original="' . $res["apply_icon"] . '" />';
                                                 }
                                             } else {
-                                                echo '<img class="lazys" title="获取" src="https://cdn.lylme.com/admin/lyear/img/get.png" data-original="' . $res["apply_icon"] . '"';
+                                                echo '<img class="lazy" src="/assets/admin/loading.gif" data-original="' . $res["apply_icon"] . '" />';
                                             }
                                             echo '</td><td>' . $res['apply_name'] . '</td><td>' . $res['apply_url'] . '</td><td><a class="btn btn-purple btn-xs" href="../include/go.php?url=' . $res['apply_url'] . '" target="_blank">访问</a></td><td>' . $DB->fetch($DB->query("SELECT * FROM `lylme_groups` WHERE `group_id` = " . $res['apply_group']))["group_name"] . '
 		</td><td>';

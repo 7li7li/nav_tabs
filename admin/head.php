@@ -60,10 +60,6 @@ try {
   <div class="lyear-layout-container">
     <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
-      <!-- logo -->
-      <div id="logo" class="sidebar-header">
-        <a href="/"><img src="/assets/img/logo-sidebar.png" alt="LyLme" title="返回首页" /></a>
-      </div>
       <div class="lyear-layout-sidebar-scroll">
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
@@ -84,22 +80,14 @@ try {
         <div class="applyrow">' . intval($applyrows) . '</div>';
               }
               ?></li>
-            <li class="nav-item active"> <a href="./theme.php"><i class="mdi mdi-seal"></i>主题设置</a></li>
             <li class="nav-item active"> <a href="./group.php"><i class="mdi mdi-folder"></i>分组管理</a></li>
             <li class="nav-item active"> <a href="./link.php"><i class="mdi mdi-web"></i>链接管理</a></li>
             <li class="nav-item active"> <a href="./tag.php"><i class="mdi mdi-cube"></i>导航菜单</a></li>
             <li class="nav-item active"> <a href="./sou.php"><i class="mdi mdi-magnify"></i>搜索引擎</a></li>
             <li class="nav-item active"> <a href="./pwd.php"><i class="mdi mdi-key-variant"></i>加密管理</a></li>
-            <li class="nav-item active"> <a href="./update.php"><i class="mdi mdi-update"></i>检查更新</a> </li>
-            <li class="nav-item active"> <a href="./wxplus.php"><i class="mdi mdi-wechat"></i>微信推送</a> </li>
-            <li class="nav-item active"> <a href="./license.php"><i class="mdi mdi-checkbox-marked-circle"></i>网站授权</a> </li>
-
             <li> <a href="javascript:loginout()"><i class="mdi mdi-logout"></i> 退出登录</a> </li>
           </ul>
         </nav>
-        <div class="sidebar-footer">
-          <p class="copyright">Copyright <?php echo date('Y'); ?> Powered by <br> <a href="https://github.com/LyLme/lylme_spage"><?php echo htmlspecialchars(explode("-", $site_title)[0]); ?></a></p>
-        </div>
       </div>
     </aside>
     <!--End 左侧导航-->
@@ -126,40 +114,9 @@ try {
                 <li> <a href="javascript:loginout()"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
               </ul>
             </li>
-            <li class="dropdown dropdown-skin">
-              <span data-toggle="dropdown" class="icon-palette" aria-expanded="false"><i class="mdi mdi-palette"></i></span>
-              <ul class="dropdown-menu dropdown-menu-right" data-stoppropagation="true">
-                <li class="drop-title">
-                  <p>主题</p>
-                </li>
-                <li class="drop-skin-li clearfix">
-                  <span class="inverse">
-                    <input type="radio" name="site_theme" value="default" id="site_theme_1">
-                    <label for="site_theme_1" onclick="theme('default')"></label>
-                  </span>
-                  <span>
-                    <input type="radio" name="site_theme" value="dark" id="site_theme_2" checked="">
-                    <label for="site_theme_2" onclick="theme('dark')"></label>
-                  </span>
-                </li>
-
-              </ul>
-            </li>
           </ul>
         </div>
       </nav>
     </header>
-    <script>
-      function theme(theme) {
-        localStorage.setItem("theme", theme);
-      }
-      var themes = localStorage.getItem("theme");
-      if (themes != "dark") {
-        var themes = 'default';
-        document.getElementById('site_theme_1').checked = true;
-      } else {
-        document.getElementById('site_theme_2').checked = true;
-      }
-      document.write('<body data-theme="' + themes + '">');
-    </script>
+    <body data-theme="default">
     <!--End 头部信息-->

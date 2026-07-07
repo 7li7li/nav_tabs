@@ -41,7 +41,6 @@ function go(input_text){
 主页：https://yyv.me/
 github：https://github.com/5iux/sou
 日期：2020/11/18
-版权所有，请勿删除
 */
 
 $(document).ready(function() {

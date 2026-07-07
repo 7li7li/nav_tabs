@@ -1,14 +1,6 @@
 <?php
 $title = '后台管理';
 include './head.php';
-$last = date("Ym");
-if (@file_get_contents('log.txt') != $last || !file_exists('cache.php')) {
-	$update = update();
-	file_put_contents('log.txt', $last);
-	var_export($update, true);
-	$content = "<?php\nreturn " . var_export($update, true) . "\n?>";
-	file_put_contents('cache.php', $content);
-}
 function tjsj($tjname)
 {
 	if ($tjname == '') {
@@ -21,19 +13,6 @@ function tjsj($tjname)
 <!--页面主要内容-->
 <main class="lyear-layout-content">
 	<div class="container-fluid">
-		<?php
-		$update  = require('cache.php');
-		if (!empty($update)) {
-			if ($update['switch']) {
-				if ($update['msg_switch'] && !empty($update['msg'])) {
-					echo '<div class="card"><div class="card-header"><h4>' . $update['title'] . '</h4></div><ul class="list-group">' . $update['msg'] . '</ul></div>';
-				}
-				if (getver($update['version']) > getver($conf['version'])) {
-					echo '<div class="card"><div class="card-header"><h4>更新提示</h4></div><ul class="list-group">' . $update['update_msg'] . '</ul></div>';
-				}
-			}
-		}
-		?>
 		<div class="row">
 			<div class="col-sm-6 col-lg-3">
 				<div class="card bg-primary">
@@ -145,30 +124,13 @@ function tjsj($tjname)
 					<b>服务器软件：</b><?php echo $_SERVER['SERVER_SOFTWARE'] ?>
 				</li>
 				<li class="list-group-item">
-					<b>程序名称：</b>六零导航页(LyLme Spage)
-				</li>
-				<li class="list-group-item">
-					<b>授权状态：<?php echo  siteurl(2, 2) ?></b>
-					<a href="https://www.lylme.com/spage/?url=<?php echo  siteurl(2, 2) ?>" target="_blank">查询</a>
-				</li>
-
-				<li class="list-group-item">
 					<b>建站日期：</b><?php echo $conf['build'] ?>
 				</li>
 				<li class="list-group-item">
-					<b>主程序版本：</b><?php echo VERSION ?> <a href="./update.php" target="_blank">检查更新</a>
+					<b>主程序版本：</b><?php echo VERSION ?>
 				</li>
 				<li class="list-group-item">
 					<b>数据库版本：</b><?php echo $conf['version'] ?>
-				</li>
-				<li class="list-group-item">
-					<b>最新版本：</b> <?php echo $update['version'] ?> <a href="https://doc.lylme.com/spage/#/logs" target="_blank">更新日志</a>
-				</li>
-				<li class="list-group-item">
-					<b>项目作者：</b>六零 <a href="https://www.lylme.com/support/" target="_blank">捐赠作者</a>
-				</li>
-				<li class="list-group-item">
-					<b>项目地址：</b><a href="https://github.com/LyLme/lylme_spage" target="_blank">https://github.com/LyLme/lylme_spage</a>
 				</li>
 			</ul>
 		</div>

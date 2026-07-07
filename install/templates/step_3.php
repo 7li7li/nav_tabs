@@ -18,6 +18,6 @@
         <div id="install"></div>
     </div>
 </div>
-<div class="footer"><span class="step3"></span> <span class="copyright"><?php echo $cfg_copyright; ?></span></div>
+<div class="footer"><span class="step3"></span></div>
 </body>
 </html>

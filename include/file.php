@@ -1,8 +1,6 @@
 <?php
 /*
  * @Description: 图片文件处理
- * @FilePath: /lylme_spage/include/file.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved.
  */
 header('Content-Type:application/json');
 require_once("common.php");

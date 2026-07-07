@@ -8,7 +8,7 @@ CRON任务：GET  http://域名/assets/img/cron.php?key=设置的密钥
 
 例如：
 $pass = 'lylme';
-CRON地址为：http://hao.lylme.com/assets/img/cron.php?key=lylme
+CRON地址为：http://域名/assets/img/cron.php
 
 */
 $pass = "";     //在这里配置密钥

@@ -1,24 +1,12 @@
 <?php
 /* 
  * @Description: 渲染页面
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-14 05:43:14
- * @FilePath: /lylme_spage/include/lists.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 // +----------------------------------------------------------+
-// | LyLme Spage                                              |
+// | Navigation                                                |
 // +----------------------------------------------------------+
-// | Copyright (c) 2022 LyLme                                 |
-// +----------------------------------------------------------+
-// | File: lists.php                                          |
-// +----------------------------------------------------------+
-// | Authors: LyLme <admin@lylme.com>                         |
-// | date: 2022-06-10                                         |
-// +----------------------------------------------------------+
-
 // 初始化全局变量，防止未定义错误
 if (!isset($conf)) {
     $conf = [];

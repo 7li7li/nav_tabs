@@ -1,12 +1,8 @@
 <?php
 /* 
  * @Description: 
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-09 02:15:34
- * @FilePath: /lylme_spage/admin/pwd.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 $title = '加密组管理';
 include './head.php';

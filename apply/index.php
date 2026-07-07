@@ -213,7 +213,7 @@ if (!empty($url = isset($_GET['url']) ? $_GET['url'] : null)) {
                 <button class="btn btn-primary btn-block" onclick="submit()">提交</button>
             </div>
             <center>
-                <p><a href="../" class="home">返回首页</a></p><?php echo $conf['copyright'] ?>
+                <p><a href="../" class="home">返回首页</a></p>
             </center>
         </div>
     </div>

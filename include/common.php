@@ -1,7 +1,6 @@
 <?php
 
 /**
- * LyLme Spage - 六零导航页
  * 公共初始化文件
  * 
  */
@@ -176,7 +175,7 @@ try {
         error_log('System Error: ' . $errorMsg . ' - ' . $dbError);
 
         if (defined('DEBUG') && DEBUG === true) {
-            exit("<h3>LyLme Spage 系统错误</h3><p>{$errorMsg}</p><p>数据库错误: {$dbError}</p>");
+            exit("<h3>系统错误</h3><p>{$errorMsg}</p><p>数据库错误: {$dbError}</p>");
         } else {
             exit("<h3>系统初始化失败，数据库错误</h3>");
         }
@@ -202,7 +201,7 @@ try {
         error_log('System Error: ' . $errorMsg);
 
         if (defined('DEBUG') && DEBUG === true) {
-            exit("<h3>LyLme Spage 系统错误</h3><p>{$errorMsg}</p>");
+            exit("<h3>系统错误</h3><p>{$errorMsg}</p>");
         } else {
             exit("<h3>系统配置不完整，请联系管理员</h3>");
         }
@@ -275,14 +274,6 @@ try {
     } else {
         exit('<h3>系统初始化失败，请联系管理员</h3>');
     }
-}
-
-// 包含表单库文件
-$formLibFile = SYSTEM_ROOT . 'lib/Form.php';
-if (file_exists($formLibFile) && is_readable($formLibFile)) {
-    require $formLibFile;
-} elseif (defined('DEBUG') && DEBUG === true) {
-    error_log("Form library missing: {$formLibFile}");
 }
 
 // 系统初始化完成，清理初始化标志

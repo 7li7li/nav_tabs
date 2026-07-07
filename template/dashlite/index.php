@@ -174,12 +174,11 @@
                         echo '<p>' . $conf["wztj"] . '</p>';
                     }
                     ?>
-                    <div class="nk-footer-copyright">
+                    <div class="nk-footer-info">
                         <?php if (!empty($conf['icp'])) {
                             echo '<p><img src="./assets/img/icp.png" width="16px" height="16px" /><a href="http://beian.miit.gov.cn/" rel="nofollow" class="icp nav-link" target="_blank" _mstmutation="1" _istranslated="1">' . $conf['icp'] . '</a></p>';
                         }
                         ?>
-                        <?php echo $conf['copyright'] ?>
                     </div>
                 </div>
             </div>

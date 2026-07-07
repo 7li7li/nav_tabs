@@ -1,6 +1,5 @@
 <?php
 
-// 主题开发文档：https://doc.lylme.com/dev/theme
 $rel = $conf["mode"] == 2 ? '' : 'rel="nofollow"';
 $html = array(
     'g1' => '<ul class="mylist row">', //分组开始标签

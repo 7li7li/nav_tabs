@@ -129,10 +129,9 @@ $webscan_get = 1;
 $webscan_cookie = 1;
 $webscan_referre = 1;
 //后台白名单,后台操作将不会拦截,添加"|"隔开白名单目录下面默认是网址带 admin  /dede/ 放行
-$webscan_white_directory = '^\/' . ADMIN_PATH . '\/set\.php$';
+$webscan_white_directory = '^.*\/' . ADMIN_PATH . '\/(set|about)\.php$';
 //url白名单,可以自定义添加url白名单
 $webscan_white_url = [
-    '/' . ADMIN_PATH . '/ajax_theme.php' => "set=save",
     '/' . ADMIN_PATH . '/about.php' => "set=conf_submit"
 ];
 

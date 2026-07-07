@@ -7,7 +7,6 @@
     <title><?php echo htmlspecialchars($conf['title'], ENT_QUOTES, 'UTF-8'); ?></title>
     <meta name="keywords" content="<?php echo htmlspecialchars($conf['keywords'], ENT_QUOTES, 'UTF-8'); ?>">
     <meta name="description" content="<?php echo htmlspecialchars($conf['description'], ENT_QUOTES, 'UTF-8'); ?>">
-    <meta name="author" content="LyLme">
     <link rel="icon" href="<?php echo htmlspecialchars($conf['logo'], ENT_QUOTES, 'UTF-8'); ?>" type="image/x-icon">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -103,7 +102,7 @@
                         <span class="search-engine-icon" id="searchIcon">
                             <?php echo $firstEngine ? $firstEngine['sou_icon'] : ''; ?>
                         </span>
-                        <span class="dropdown-arrow">▾</span>
+                        <span class="dropdown-arrow" aria-hidden="true"></span>
                     </button>
                     <input
                         type="text"

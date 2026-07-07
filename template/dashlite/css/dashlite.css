@@ -7918,11 +7918,11 @@ body.nav-shown { overflow: hidden; }
 
 .nk-footer-wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 
-.nk-footer-copyright { color: #8094ae; }
+.nk-footer-info { color: #8094ae; }
 
-.nk-footer-copyright a { color: inherit; }
+.nk-footer-info a { color: inherit; }
 
-.nk-footer-copyright a:hover { color: #6576ff; }
+.nk-footer-info a:hover { color: #6576ff; }
 
 @media (min-width: 576px) { .nk-footer { padding: 20px 22px; } }
 

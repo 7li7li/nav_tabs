@@ -14,7 +14,6 @@
 		<meta name="keywords" content="<?php echo $conf['keywords']?>">
 		<meta name="description" content="<?php echo $conf['description']?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="author" content="LyLme_pro">
 		<link rel="icon" href="<?php echo $conf['logo']?>" type="image/x-icon">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-touch-fullscreen" content="yes">
@@ -186,8 +185,6 @@ $rel = $conf["mode"] == 2 ? '' : 'rel="nofollow"';
   <?php if ($conf['icp'] != null) {
       echo '<a href="http://beian.miit.gov.cn/" class="icp" target="_blank" _mstmutation="1" _istranslated="1">' . $conf['icp'] . '</a>';
   } ?> 
-  <!--版权信息-->
-  <p> <?php echo $conf['copyright']; ?></p>
   <!--网站统计-->
  <?php if ($conf['wztj'] != null) {
      echo $conf["wztj"];

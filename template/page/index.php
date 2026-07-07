@@ -40,13 +40,11 @@ $tagslists = $site->getTags();
 	</header>
 	<footer id="footer">
 		 
-	<p class="copyright">
 	 <!--备案信息-->
 	 <?php if (!empty($conf['icp'])) {
                 echo '<p><a href="http://beian.miit.gov.cn/"  class="icp nav-link" target="_blank" _mstmutation="1" _istranslated="1">' . $conf['icp'] . '</a></p>';
             }
             ?>	
-	<?php echo $conf['copyright']; ?></p>
 	</footer>
 </div>
 <div id="bg">

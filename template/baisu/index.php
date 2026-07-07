@@ -187,7 +187,7 @@
 	</div>
 	</div>
 	<!--中间主体 E-->
-	<!--底部版权 S-->
+	<!--底部信息 S-->
 	<footer>
 		<!--网站统计-->
 		<?php if (!empty($conf['wztj'])) {
@@ -207,9 +207,8 @@
 			echo '<a href="http://beian.miit.gov.cn/" rel="nofollow" class="icp nav-link" target="_blank" _mstmutation="1" _istranslated="1">' . $conf['icp'] . '</a>';
 		}
 		?>
-		<p>Theme By <a href="https://gitee.com/baisucode/baisu-two" target="_blank">BaiSu</a>. <?php echo $conf['copyright'] ?></p>
 	</footer>
-	<!--底部版权 E-->
+	<!--底部信息 E-->
 	<!--返回顶部 S-->
 	<div class="tool-list">
 		<div class="scroll_top list">
@@ -234,4 +233,4 @@
 <!--1. 当前主题使用基于baisuTwo主题开发，作者：baisu-->
 <!--2. 原项目地址https://gitee.com/baisucode/baisu-two-->
 <!--3. 二开作者：六零-->
-<!--4. 修改了适配LyLme Spage，修改了部分CSS，删除不适用与本项目的代码-->
+<!--4. 修改了部分CSS，删除不适用与本项目的代码-->

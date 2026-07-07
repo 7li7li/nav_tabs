@@ -9,7 +9,7 @@
 ** 修改$api为自己的推送接口地址
 
 */
-$api = 'http://data.zz.baidu.com/urls?site=https://hao.lylme.com&token=xxxxxxxx';
+$api = 'http://data.zz.baidu.com/urls?site=https://example.com&token=xxxxxxxx';
 
 //以下内容无需修改
 include_once("../include/common.php");

@@ -4,7 +4,6 @@
  * 公共函数库
  * 
  * @Description: 公共函数
- * @Copyright (c) 2024 by LyLme, All Rights Reserved.
  */
 
 // 定义全局变量占位符，防止未定义错误
@@ -791,7 +790,7 @@ function ins_link($name, $url, $icon, $group_id)
 }
 
 /**
- * 获取主题自定义设置
+ * 获取模板默认配置
  * @param string $name 参数名称
  * @param mixed $default 默认值
  * @return mixed
@@ -805,25 +804,15 @@ function theme_config($name, $default = '')
     }
 
     $template = $config['template'];
-    $theme_name = "theme_config_" . $template;
+    $template_config_path = defined('ROOT') ? ROOT . 'template/' . $template . '/config.php' : __DIR__ . '/../../template/' . $template . '/config.php';
 
-    // 从数据库配置中获取
-    if (isset($config[$theme_name]) && !empty($config[$theme_name])) {
-        $theme_themes = @json_decode($config[$theme_name], true);
-        if (is_array($theme_themes) && isset($theme_themes[$name])) {
-            return $theme_themes[$name];
-        }
-    }
+    if (file_exists($template_config_path) && is_readable($template_config_path)) {
+        $template_config = [];
+        @include $template_config_path;
+        $template_config = isset($theme_config) && is_array($theme_config) ? $theme_config : $template_config;
 
-    // 从主题配置文件获取
-    $theme_config_path = defined('ROOT') ? ROOT . 'template/' . $template . '/config.php' : __DIR__ . '/../../template/' . $template . '/config.php';
-
-    if (file_exists($theme_config_path) && is_readable($theme_config_path)) {
-        $theme_config = [];
-        @include $theme_config_path;
-
-        if (is_array($theme_config)) {
-            foreach ($theme_config as $config_item) {
+        if (is_array($template_config)) {
+            foreach ($template_config as $config_item) {
                 if (isset($config_item['name']) && $config_item['name'] == $name) {
                     return isset($config_item['value']) ? $config_item['value'] : $default;
                 }

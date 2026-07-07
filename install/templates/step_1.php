@@ -141,7 +141,6 @@
     </div>
     <div class="footer">
         <span class="step2"></span>
-        <span class="copyright"><?= $cfg_copyright; ?></span>
         <span class="formSubBtn">
             <form class="j-form" method="post" action="index.php">
                 <a href="javascript:void(0);" onclick="history.go(-1);return false;" class="back">返 回</a>

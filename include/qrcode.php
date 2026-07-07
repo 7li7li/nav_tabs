@@ -1,12 +1,8 @@
 <?php
 /* 
  * @Description: 生成二维码
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-04-09 03:36:21
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-09 04:22:36
- * @FilePath: /lylme_spage/include/qrcode.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 include "./common.php";
 include "./lib/phpqrcode.php";
@@ -47,9 +43,9 @@ if ($logo != FALSE) {
     $logo_qr_height, $logo_width, $logo_height);   
 }   
 //输出图片   
-header('Content-Type: image/png');  
+header('Content-Type: image/png');
 header('Cache-Control: max-age=300');
-imagepng($QR);  
+imagepng($QR);
 
-// 释放内存  
-imagedestroy($QR);  
+// 释放内存
+imagedestroy($QR);

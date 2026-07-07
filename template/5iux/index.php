@@ -121,8 +121,6 @@
     }
     ?>
                 </p>
-                <!--版权信息-->
-                <p><?php echo $conf['copyright']; ?></p>
                 <!--自定义footer-->
                 <?php if (!empty($conf['wztj'])) {
                     echo  $conf["wztj"];
@@ -149,7 +147,6 @@
 主页：https://blog.5iux.cn/
 github：https://github.com/5iux/sou
 日期：2020-11-23
-版权所有，请勿删除
 -->
 
 </html>

@@ -32,9 +32,6 @@
     <?php
     echo($conf['about_content']);
 ?>
-    <center>
-      <p class="footer"><?php echo $conf['copyright'] ?></p>
-    </center>
   </div>
 </body>
 

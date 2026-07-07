@@ -7,7 +7,6 @@
 	<title><?php echo $conf['title'] ?></title>
 	<meta name="keywords" content="<?php echo $conf['keywords'] ?>">
 	<meta name="description" content="<?php echo $conf['description'] ?>">
-	<meta name="author" content="LyLme">
 	<link rel="icon" href="<?php echo $conf['logo'] ?>" type="image/x-icon">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-touch-fullscreen" content="yes">

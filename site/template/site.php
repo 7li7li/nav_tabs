@@ -1,12 +1,8 @@
 <?php
 /*
  * @Description:
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-13 22:51:33
- * @FilePath: /lylme_spage/site/template/site.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved.
  */
 
 ?>
@@ -160,7 +156,6 @@ if (!empty($conf['snapshot'])) {
                     echo '<p>' . $conf["wztj"] . '</p>';
                 }
 ?>
-                <p> <?php echo $conf['copyright']; ?> </p>
 
 
 

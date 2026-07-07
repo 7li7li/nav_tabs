@@ -1,12 +1,8 @@
 <?php
 /* 
  * @Description: 用于获取Bing每日壁纸，以PHP文件返回图片
- * @Author: LyLme admin@lylme.com
  * @Date: 2024-01-23 12:25:35
- * @LastEditors: LyLme admin@lylme.com
  * @LastEditTime: 2024-04-13 23:19:55
- * @FilePath: /lylme_spage/assets/img/bing.php
- * @Copyright (c) 2024 by LyLme, All Rights Reserved. 
  */
 
 $str = get_curl('http://cn.bing.com/HPImageArchive.aspx?idx=0&n=1');

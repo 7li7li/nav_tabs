@@ -14,8 +14,6 @@
     <?php if ($conf['icp'] != null) {
         echo '<p><a href="http://beian.miit.gov.cn/" class="icp" target="_blank" _mstmutation="1" _istranslated="1">' . $conf['icp'] . '</a></p>';
     } ?>
-    <!--版权信息-->
-    <p> <?php echo $conf['copyright']; ?></p>
     <!--网站统计-->
     <?php if ($conf['wztj'] != null) {
         echo $conf["wztj"];

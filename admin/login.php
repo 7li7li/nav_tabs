@@ -230,13 +230,9 @@ $background = background();
           </div>
           <?php
           if (isset($_COOKIE['login_failed'])) {
-            echo '  <p class="m-b-0 text-right"><a target="_blank" title="忘记后台密码" href="https://doc.lylme.com/spage/#/reset">忘记密码</a></p>';
+            echo '  <p class="m-b-0 text-right">请通过数据库重置后台密码</p>';
           } ?>
         </form>
-        <hr>
-        <footer class="col-sm-12 text-center">
-          <p class="m-b-0">Copyright <?php echo date('Y'); ?> <a href="/"><?php echo htmlspecialchars($page_title); ?></a></p>
-        </footer>
       </div>
     </div>
   </div>
