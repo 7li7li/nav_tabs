@@ -1,162 +1,195 @@
 <!DOCTYPE html>
-
-<html lang="zh-CN" element::-webkit-scrollbar {display:none}>
+<html lang="zh-CN">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?php echo $conf['title'] ?></title>
-	<meta name="keywords" content="<?php echo $conf['keywords'] ?>">
-	<meta name="description" content="<?php echo $conf['description'] ?>">
-	<meta name="author" content="LyLme">
-	<link rel="icon" href="<?php echo $conf['logo'] ?>" type="image/x-icon">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-touch-fullscreen" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="full-screen" content="yes">
-	<meta name="browsermode" content="application">
-	<meta name="x5-fullscreen" content="true">
-	<meta name="x5-page-mode" content="app">
-	<meta name="lsvn" content="<?php echo base64_encode($conf['version']) ?>">
-	<script src="<?php echo $cdnpublic ?>/assets/js/jquery.min.js" type="application/javascript"></script>
-	<link href="<?php echo $cdnpublic ?>/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo $templatepath; ?>/css/style.css?v=20240414" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo htmlspecialchars($conf['title'], ENT_QUOTES, 'UTF-8'); ?></title>
+    <meta name="keywords" content="<?php echo htmlspecialchars($conf['keywords'], ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="description" content="<?php echo htmlspecialchars($conf['description'], ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="author" content="LyLme">
+    <link rel="icon" href="<?php echo htmlspecialchars($conf['logo'], ENT_QUOTES, 'UTF-8'); ?>" type="image/x-icon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="full-screen" content="yes">
+    <meta name="browsermode" content="application">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="x5-page-mode" content="app">
+    <meta name="lsvn" content="<?php echo base64_encode($conf['version']); ?>">
+    <link rel="stylesheet" href="<?php echo $templatepath; ?>/css/style.css?v=20260707" type="text/css">
 </head>
 
 <body>
-	<div class="banner-video">
+    <?php
+    $rel = $conf["mode"] == 2 ? 'noopener noreferrer' : 'nofollow noopener noreferrer';
+    $sessionList = isset($_SESSION['list']) && is_array($_SESSION['list']) ? $_SESSION['list'] : [];
+    $backgroundUrl = !empty(background()) ? background() : './assets/img/background.jpg';
 
-		<?php
-		if (theme_config('background_position', 0) == 1) {
-			echo '<style>.banner-video{position: fixed !important;}</style>';
-		}
-		if (!empty(background())) {
-			echo '<img src="' . background() . '">';
-		} ?>
+    function navtabs_e($value)
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
 
-		<div class="bottom-cover" style="background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(244 248 251 / 0.6) 50%, rgb(244 248 251) 100%);">
-		</div>
-	</div>
+    function navtabs_search_url($row)
+    {
+        if (checkmobile() && !empty($row['sou_waplink'])) {
+            return $row['sou_waplink'];
+        }
+        return $row['sou_link'];
+    }
 
-	<div class="box">
-		<div class="change-type">
-			<div class="type-left" id="type-left">
-				<ul>
-					<li data-lylme="search"><a>搜索</a><span></span></li>
-					<?php
-					$groups = $site->getGroups(); // 获取分类
-					while ($group = $DB->fetch($groups)) { //循环所有分组
+    $searchEngines = [];
+    $soulists = $site->getSou();
+    while ($sou = $DB->fetch($soulists)) {
+        $searchEngines[] = $sou;
+    }
+    $firstEngine = isset($searchEngines[0]) ? $searchEngines[0] : null;
 
-						echo '<li data-lylme="group_' . $group["group_id"] . '"><a>' . $group["group_name"] . '</a><span></span></li>' . "\n";
-					}
-					?>
-				</ul>
-			</div>
+    $groupsData = [];
+    $groups = $site->getGroups();
+    while ($group = $DB->fetch($groups)) {
+        $groupId = (int)$group['group_id'];
+        $groupPwd = isset($group['group_pwd']) ? $group['group_pwd'] : '';
+        $links = [];
+        $groupLinks = $site->getCategoryLinks($groupId);
 
-		</div>
-	</div>
+        while ($link = $DB->fetch($groupLinks)) {
+            $linkPwd = isset($link['link_pwd']) ? $link['link_pwd'] : '';
+            $linkStatus = isset($link['link_status']) ? (int)$link['link_status'] : 1;
+            $linkAllowed = true;
 
-	<!--topbar开始-->
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="position: absolute; z-index: 10000;">
-		<!--<a class="navbar-brand" href="/"><img src="./assets/img/logo.png" height="25"  title="LyLme_Spage"></a>-->
-		<button class="navbar-toggler collapsed" style="border: none; outline: none;" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-			<svg class="icon" width="200" height="200">
-				<use xlink:href="#icon-menus"></use>
-			</svg>
-		</button>
+            if (empty($groupPwd) && !empty($linkPwd) && !in_array((int)$linkPwd, $sessionList, true)) {
+                $linkAllowed = false;
+            }
 
-		<div class="type-right">
-			<svg t="1711940240250" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7074" width="200" height="200">
-				<path d="M512 0c281.6 0 512 230.4 512 512s-230.4 512-512 512S0 793.6 0 512 230.4 0 512 0z m192.96 261.888l-259.904 78.784c-51.2 13.76-90.592 53.184-106.336 104.384L259.936 704.96c-5.888 15.776 0 33.472 11.808 45.312 7.872 9.824 21.696 13.76 33.472 13.76 3.936 0 9.856 0 13.792-1.984l259.904-78.784c51.2-13.76 90.592-53.184 106.336-104.384l78.784-259.904c5.888-15.776 0-33.472-11.808-45.312-13.792-13.76-31.52-17.728-47.296-11.808v-0.032z m-96.448 295.424a79.872 79.872 0 0 1-53.184 53.152l-200.864 59.072 61.056-202.816a79.904 79.904 0 0 1 53.184-53.184l200.864-59.072-61.056 202.848zM472.64 512a39.36 39.36 0 1 0 78.72 0 39.36 39.36 0 0 0-78.72 0z" fill="#dbdbdb" p-id="7075" data-spm-anchor-id="a313x.search_index.0.i6.29583a81RxO4Dj" class="selected"></path>
-			</svg>
-		</div>
-		<div class="collapse navbar-collapse" id="navbarsExample05">
-			<ul class="navbar-nav mr-auto">
+            if ($linkStatus && $linkAllowed) {
+                $links[] = $link;
+            }
+        }
 
-				<?php
-				$tagslists = $site->getTags();
-				while ($taglists = $DB->fetch($tagslists)) {
-					echo '<li class="nav-item"><a class="nav-link" href="' . $taglists["tag_link"] . '"';
-					if ($taglists["tag_target"] == 1) {
-						echo ' target="_blank"';
-					}
-					echo '>' . $taglists["tag_name"] . '</a></li>
-				    ';
-				}
-				?>
+        $groupsData[] = [
+            'group' => $group,
+            'links' => $links
+        ];
+    }
+    ?>
 
-			</ul>
-			<div id="main">
-				<div id="show_date"></div>
-				<div id="show_time"></div>
-			</div>
-		</div>
+    <div class="background-image" style="background-image: url('<?php echo navtabs_e($backgroundUrl); ?>');"></div>
 
-	</nav>
-	<!--topbar结束-->
-	<div class="container" style="margin-top:10vh; position: relative; z-index: 100;">
-		<?php
-		echo theme_config('home_title');
-		if ($conf['yan'] == 'true') {
-			echo '<p class="content">' . yan() . '</p>';
-		}
-		?>
-		<!--搜索开始-->
-		<div id="search" class="s-search">
-			<div id="search-list" class="hide-type-list">
-				<div class="search-group group-a s-current" style=" margin-top: 50px;">
-					<ul class="search-type">
-						<?php
-						$soulists = $site->getSou();
-						while ($soulist = $DB->fetch($soulists)) {
-							if ($soulist["sou_st"] == 1) {
-								echo '	<li>
-								<input hidden=""  checked="" type="radio" name="type" id="type-' . $soulist["sou_alias"] . '" value="';
-								if (checkmobile() && !empty($soulist["sou_waplink"])) {
-									echo $soulist["sou_waplink"];
-								} else {
-									echo $soulist["sou_link"];
-								}
-								echo '"data-placeholder="' . $soulist["sou_hint"] . '">
-								<label for="type-' . $soulist["sou_alias"] . '" style="font-weight:600">
-								' . $soulist["sou_icon"] . '
-									<span style="color:' . $soulist["sou_color"] . '">
-										' . $soulist["sou_name"] . '
-									</span>
-								</label>
-							</li>
-							';
-							}
-						}
-						?>
-					</ul>
-				</div>
-			</div>
-			<form action="https://www.bing.com/search?q=" method="get" target="_blank" id="super-search-fm">
-				<input type="text" id="search-text" placeholder="搜索一下" name="q" style="outline:0" autocomplete="off">
-				<button class="submit" type="submit">
-					<svg style="width: 22px; height: 22px; margin: 0 20px 0 20px; color: #fff;" class="icon" aria-hidden="true" viewBox="0 0 1024 1024">
-						<use xlink:href="#icon-sousuo">
-						</use>
-					</svg>
-					<span>
-				</button>
+    <div class="top-links" aria-label="站点导航">
+        <?php
+        $tagslists = $site->getTags();
+        while ($tag = $DB->fetch($tagslists)) {
+            echo '<a href="' . navtabs_e($tag['tag_link']) . '"';
+            if ((int)$tag['tag_target'] === 1) {
+                echo ' target="_blank" rel="noopener noreferrer"';
+            }
+            echo '>' . navtabs_e($tag['tag_name']) . '</a>';
+        }
+        ?>
+    </div>
 
-				<ul id="word" style="display: none;">
-				</ul>
-			</form>
-			<div class="set-check hidden-xs">
-				<input type="checkbox" id="set-search-blank" class="bubble-3" autocomplete="off">
-			</div>
-		</div>
+    <main class="container">
+        <section class="clock-container" aria-label="当前时间">
+            <div class="time" id="currentTime">00:00:00</div>
+            <div class="date" id="currentDate">0000年0月0日 星期一</div>
+        </section>
 
-		<?php
-		if (theme_config('lytoday', 0) == 1) {
-			echo theme_config('lytodaycode');
-		}
-		include "list.php";
-		if (theme_config('lytoday', 0) == 2) {
-			echo theme_config('lytodaycode');
-		}
-		include "footer.php";
-		?>
+        <section class="search-container" aria-label="搜索">
+            <form id="navSearchForm" class="search-form" action="#" method="get" target="_blank">
+                <div class="search-box">
+                    <button class="search-engine-selector" id="searchEngineToggle" type="button" aria-label="选择搜索引擎">
+                        <span class="search-engine-icon" id="searchIcon">
+                            <?php echo $firstEngine ? $firstEngine['sou_icon'] : ''; ?>
+                        </span>
+                        <span class="dropdown-arrow">▾</span>
+                    </button>
+                    <input
+                        type="text"
+                        class="search-input"
+                        id="searchInput"
+                        autocomplete="off"
+                        data-default-url="<?php echo $firstEngine ? navtabs_e(navtabs_search_url($firstEngine)) : 'https://www.baidu.com/s?wd='; ?>"
+                        placeholder="<?php echo $firstEngine ? navtabs_e($firstEngine['sou_hint']) : '搜索...'; ?>">
+                </div>
+
+                <div class="search-engines-dropdown" id="searchEngines">
+                    <?php foreach ($searchEngines as $index => $engine) { ?>
+                        <button
+                            type="button"
+                            class="search-engine-option<?php echo $index === 0 ? ' active' : ''; ?>"
+                            data-url="<?php echo navtabs_e(navtabs_search_url($engine)); ?>"
+                            data-placeholder="<?php echo navtabs_e($engine['sou_hint']); ?>"
+                            data-icon="<?php echo navtabs_e($engine['sou_icon']); ?>">
+                            <span class="option-icon"><?php echo $engine['sou_icon']; ?></span>
+                            <span><?php echo navtabs_e($engine['sou_name']); ?></span>
+                        </button>
+                    <?php } ?>
+                </div>
+            </form>
+        </section>
+
+        <nav class="tabs-nav" aria-label="分类">
+            <div class="tab-buttons" id="tabButtons">
+                <?php foreach ($groupsData as $index => $item) {
+                    $group = $item['group'];
+                    $groupId = (int)$group['group_id'];
+                    echo '<button class="tab-button' . ($index === 0 ? ' active' : '') . '" type="button" data-target="group_' . $groupId . '">' . navtabs_e($group['group_name']) . '</button>';
+                } ?>
+            </div>
+        </nav>
+
+        <section class="main-content">
+            <?php foreach ($groupsData as $index => $item) {
+                $group = $item['group'];
+                $groupId = (int)$group['group_id'];
+                $links = $item['links'];
+            ?>
+                <div class="sites-panel<?php echo $index === 0 ? ' active' : ''; ?>" id="group_<?php echo $groupId; ?>" data-panel>
+                    <div class="sites-container">
+                        <?php foreach ($links as $link) { ?>
+                            <a class="site-card" rel="<?php echo $rel; ?>" href="<?php echo navtabs_e($link['url']); ?>" title="<?php echo navtabs_e($link['name']); ?>" target="_blank">
+                                <span class="site-card-bg-icon" aria-hidden="true"><?php echo $link['icon']; ?></span>
+                                <span class="site-card-content">
+                                    <span class="site-icon"><?php echo $link['icon']; ?></span>
+                                    <span class="site-title"><?php echo navtabs_e($link['name']); ?></span>
+                                </span>
+                            </a>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </section>
+
+        <?php include "footer.php"; ?>
+    </main>
+
+    <button class="ai-chat-trigger show" id="aiChatTrigger" type="button" aria-label="打开AI对话">
+        <span class="ai-chat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 2.75l1.76 5.36 5.64.01-4.56 3.31 1.73 5.38L12 13.48l-4.57 3.33 1.73-5.38L4.6 8.12l5.64-.01L12 2.75z"></path>
+                <path d="M5.8 17.2l.7 2.05 2.15.01-1.73 1.26.65 2.08-1.77-1.28-1.77 1.28.65-2.08-1.73-1.26 2.15-.01.7-2.05z"></path>
+            </svg>
+        </span>
+        <span>AI对话</span>
+    </button>
+
+    <div class="ai-chat-modal" id="aiChatModal" aria-hidden="true">
+        <section class="ai-chat-container" id="aiChatContainer" role="dialog" aria-modal="true" aria-label="AI对话">
+            <header class="ai-chat-header">
+                <h3>AI对话</h3>
+                <div class="ai-chat-controls">
+                    <button class="ai-chat-maximize" id="aiChatMaximize" type="button" title="最大化" aria-label="最大化">□</button>
+                    <button class="ai-chat-close" id="aiChatClose" type="button" title="关闭" aria-label="关闭">×</button>
+                </div>
+            </header>
+            <div class="ai-chat-content">
+                <iframe id="aiChatFrame" data-src="https://ai.7li7li.cn" src="about:blank" title="AI对话" allowfullscreen></iframe>
+            </div>
+            <div class="ai-chat-resize-handle" aria-hidden="true"></div>
+        </section>
+    </div>
+</body>
+
+</html>
